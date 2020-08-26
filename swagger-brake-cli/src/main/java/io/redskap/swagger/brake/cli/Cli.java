@@ -33,7 +33,20 @@ public class Cli {
             Options options = optionsProvider.provide();
             Collection<BreakingChange> breakingChanges = Starter.start(options);
             if (CollectionUtils.isNotEmpty(breakingChanges)) {
-                return 1;
+                boolean isPrivateOnlyBroken = true;
+                for(BreakingChange bc : breakingChanges) {
+                    if (!bc.getMessage().contains("private")) {
+                        isPrivateOnlyBroken = false;
+                        break;
+                    }
+                }
+                if (isPrivateOnlyBroken) {
+                    log.warn("There are broken private APIs. Currently we are not fail on this");
+                    return 0;
+                }
+                else {
+                    return 1;
+                }
             } else {
                 return 0;
             }

@@ -14,7 +14,20 @@ class StdOutReporter implements Reporter, CheckableReporter {
     @Override
     public void report(Collection<BreakingChange> breakingChanges, Options options) {
         if (!breakingChanges.isEmpty()) {
-            System.err.println("There were breaking API changes");
+            boolean isPrivateOnlyBroken = true;
+            for(BreakingChange bc : breakingChanges) {
+                if (!bc.getMessage().contains("private")) {
+                    isPrivateOnlyBroken = false;
+                    break;
+                }
+            }
+            if (isPrivateOnlyBroken) {
+                System.err.println("There were breaking private API only changes");
+            }
+            else {
+                System.err.println("There were breaking API changes");
+            }
+
             breakingChanges.stream().map(BreakingChange::getMessage).forEach(System.err::println);
         } else {
             System.out.println("No breaking API changes detected");

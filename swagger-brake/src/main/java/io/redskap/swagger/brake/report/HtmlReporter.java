@@ -38,7 +38,21 @@ class HtmlReporter extends AbstractFileReporter implements CheckableReporter {
 
     @Override
     protected String toFileContent(Collection<BreakingChange> breakingChanges) {
-        String mustacheTemplate = "htmlreporter/swagger-brake.mustache";
+        boolean isPrivateOnlyBroken = true;
+        for(BreakingChange bc : breakingChanges) {
+            if (!bc.getMessage().contains("private")) {
+                isPrivateOnlyBroken = false;
+                break;
+            }
+        }
+        String mustacheTemplate;
+        if (isPrivateOnlyBroken) {
+            mustacheTemplate = "htmlreporter/swagger-brake-warn.mustache";
+        }
+        else {
+            mustacheTemplate = "htmlreporter/swagger-brake.mustache";
+        }
+
         HtmlData data = new HtmlData();
         List<BreakingChangeTableRow> tableRows = breakingChanges.stream().map(BreakingChangeTableRow::new).collect(Collectors.toCollection(ArrayList::new));
         if (!tableRows.isEmpty()) {
