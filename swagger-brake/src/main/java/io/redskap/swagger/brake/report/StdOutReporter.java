@@ -15,7 +15,7 @@ class StdOutReporter implements Reporter, CheckableReporter {
     public void report(Collection<BreakingChange> breakingChanges, Options options) {
         if (!breakingChanges.isEmpty()) {
             boolean isPrivateOnlyBroken = true;
-            for(BreakingChange bc : breakingChanges) {
+            for (BreakingChange bc : breakingChanges) {
                 if (!bc.getMessage().contains("private")) {
                     isPrivateOnlyBroken = false;
                     break;

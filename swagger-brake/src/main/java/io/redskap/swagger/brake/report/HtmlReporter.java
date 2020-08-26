@@ -39,8 +39,8 @@ class HtmlReporter extends AbstractFileReporter implements CheckableReporter {
     @Override
     protected String toFileContent(Collection<BreakingChange> breakingChanges) {
         boolean isPrivateOnlyBroken = true;
-        for(BreakingChange bc : breakingChanges) {
-            if (!bc.getMessage().contains("private")) {
+        for (BreakingChange bc : breakingChanges) {
+            if (bc.getMessage() != null && !bc.getMessage().contains("private")) {
                 isPrivateOnlyBroken = false;
                 break;
             }

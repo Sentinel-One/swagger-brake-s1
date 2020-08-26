@@ -34,7 +34,7 @@ public class Cli {
             Collection<BreakingChange> breakingChanges = Starter.start(options);
             if (CollectionUtils.isNotEmpty(breakingChanges)) {
                 boolean isPrivateOnlyBroken = true;
-                for(BreakingChange bc : breakingChanges) {
+                for (BreakingChange bc : breakingChanges) {
                     if (!bc.getMessage().contains("private")) {
                         isPrivateOnlyBroken = false;
                         break;
