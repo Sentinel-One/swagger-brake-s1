@@ -48,8 +48,7 @@ class HtmlReporter extends AbstractFileReporter implements CheckableReporter {
         String mustacheTemplate;
         if (isPrivateOnlyBroken) {
             mustacheTemplate = "htmlreporter/swagger-brake-warn.mustache";
-        }
-        else {
+        } else {
             mustacheTemplate = "htmlreporter/swagger-brake.mustache";
         }
 

@@ -43,8 +43,7 @@ public class Cli {
                 if (isPrivateOnlyBroken) {
                     log.warn("There are broken private APIs. Currently we are not fail on this");
                     return 0;
-                }
-                else {
+                } else {
                     return 1;
                 }
             } else {

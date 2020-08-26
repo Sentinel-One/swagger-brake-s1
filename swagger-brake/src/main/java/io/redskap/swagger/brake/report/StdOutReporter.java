@@ -23,8 +23,7 @@ class StdOutReporter implements Reporter, CheckableReporter {
             }
             if (isPrivateOnlyBroken) {
                 System.err.println("There were breaking private API only changes");
-            }
-            else {
+            } else {
                 System.err.println("There were breaking API changes");
             }
 
