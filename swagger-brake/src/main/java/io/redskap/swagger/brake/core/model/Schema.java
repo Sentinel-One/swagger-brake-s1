@@ -58,7 +58,6 @@ public class Schema {
 
         for (SchemaAttribute schemaAttribute : schemaAttributes) {
             Schema childSchema = schemaAttribute.getSchema();
-
             if (childSchema != null) {
                 Collection<SchemaAttribute> childSchemaAttributes = childSchema.getSchemaAttributes();
                 if (isEmpty(childSchemaAttributes)) {
