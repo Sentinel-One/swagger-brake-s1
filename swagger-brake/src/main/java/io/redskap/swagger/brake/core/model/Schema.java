@@ -43,6 +43,12 @@ public class Schema {
     }
 
     private Collection<String> internalGetEnums(Collection<SchemaAttribute> schemaAttributes, String levelName) {
+        for (SchemaAttribute value : schemaAttributes) {
+            if (!value.getSchema().getEnumValues().isEmpty() && value.getSchema().getEnumValues().toArray()[0] instanceof Integer) {
+                System.out.println("skipping Integers enum since it isn't supported by swagger-brake");
+                return Collections.emptySet();
+            }
+        }
         Collection<String> result = schemaAttributes
             .stream()
             .filter(a -> a.getSchema() != null)
@@ -52,6 +58,7 @@ public class Schema {
 
         for (SchemaAttribute schemaAttribute : schemaAttributes) {
             Schema childSchema = schemaAttribute.getSchema();
+
             if (childSchema != null) {
                 Collection<SchemaAttribute> childSchemaAttributes = childSchema.getSchemaAttributes();
                 if (isEmpty(childSchemaAttributes)) {
